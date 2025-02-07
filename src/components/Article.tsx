@@ -2,9 +2,9 @@
 import Image from 'next/image'
 import React from 'react'
 import FavoriteIcon from '@mui/icons-material/Favorite'
-const Article = () => {
+const Article = ({ author, title, description }: any) => {
     return (
-        <div className="border-b-4 pb-6">
+        <div className="border-b-4 pb-6 mt-4">
             <div className="flex justify-between">
                 <div className="flex gap-x-3">
                     <Image
@@ -16,7 +16,7 @@ const Article = () => {
                         height={40}
                     />
                     <div>
-                        <p>Phuc Pham</p>
+                        <p>{author}</p>
                         <p>February 20, 2025</p>
                     </div>
                 </div>
@@ -27,12 +27,8 @@ const Article = () => {
                 </div>
             </div>
             <div className="mt-4">
-                <h2 className="text-2xl font-semibold">
-                    titletitletitletitletitletitletitletitletitletitle
-                </h2>
-                <p className="text-xl text-gray-500">
-                    descriptiondescriptiondescriptiondescription
-                </p>
+                <h2 className="text-2xl font-semibold">{title}</h2>
+                <p className="text-xl text-gray-500">{description}</p>
             </div>
             <div className="mt-3 flex justify-between">
                 <p className="text-gray-400">Read more...</p>

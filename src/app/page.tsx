@@ -1,15 +1,32 @@
 'use client'
+import getAllArticles from '@/apis/articles/getAllArticles'
 import Article from '@/components/Article'
 import Banner from '@/components/Banner'
 import TagList from '@/components/TagList'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import Pagination from '@mui/material/Pagination'
 
 export default function Home() {
     const [currentTab, setCurrentTab] = useState('Global Feed')
     const [allTab, setAllTab] = useState(['Global Feed', 'Your Feed'])
+    const [currentPage, setCurrentPage] = useState(1)
+    const [articles, setArticles] = useState<{
+        article: any[]
+        totalPage: number
+    }>({ article: [], totalPage: 0 })
     const handleTabClick = (tab: string) => {
         setCurrentTab(tab)
     }
+    const handlePageChange = (event: any, value: any) => {
+        setCurrentPage(value)
+    }
+    useEffect(() => {
+        const fetchedAllArticles = async () => {
+            const fetchedArticle = await getAllArticles(currentPage)
+            setArticles(fetchedArticle.data)
+        }
+        fetchedAllArticles()
+    }, [currentPage])
     return (
         <div className="">
             <Banner />
@@ -27,8 +44,30 @@ export default function Home() {
                         ))}
                     </ul>
                     <div className="mt-6">
-                        <Article />
+                        {articles?.article?.map((article: any) => (
+                            <Article
+                                key={article.articleid}
+                                author={article.user.username}
+                                title={article.title}
+                                description={article.description}
+                            />
+                        ))}
                     </div>
+                    <Pagination
+                        style={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: '40px 0 0 0',
+                        }}
+                        count={articles.totalPage}
+                        page={currentPage}
+                        variant="outlined"
+                        shape="rounded"
+                        size="large"
+                        color="primary"
+                        onChange={handlePageChange}
+                    />
                 </div>
                 <div className="w-1/4">
                     <TagList />
