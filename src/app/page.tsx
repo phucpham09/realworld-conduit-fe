@@ -5,8 +5,11 @@ import Banner from '@/components/Banner'
 import TagList from '@/components/TagList'
 import { useState, useEffect } from 'react'
 import Pagination from '@mui/material/Pagination'
-
+import { useAuth } from '@/context/AuthContext'
+import { useRouter } from 'next/navigation'
 export default function Home() {
+    const { user, loading, logout } = useAuth()
+    const router = useRouter()
     const [currentTab, setCurrentTab] = useState('Global Feed')
     const [allTab, setAllTab] = useState(['Global Feed', 'Your Feed'])
     const [currentPage, setCurrentPage] = useState(1)
@@ -14,6 +17,7 @@ export default function Home() {
         article: any[]
         totalPage: number
     }>({ article: [], totalPage: 0 })
+
     const handleTabClick = (tab: string) => {
         setCurrentTab(tab)
     }
@@ -26,10 +30,15 @@ export default function Home() {
             setArticles(fetchedArticle.data)
         }
         fetchedAllArticles()
-    }, [currentPage])
+        if (!loading && !user) {
+            router.push('/')
+        }
+    }, [currentPage, user, loading, router])
+
+    if (loading) return <p>Loading...</p>
     return (
         <div className="">
-            <Banner />
+            {!user && <Banner />}
             <div className="flex px-20 my-10 gap-x-10">
                 <div className="w-3/4">
                     <ul className="flex border-b-2 gap-x-6">

@@ -1,27 +1,37 @@
 'use client'
-import login from '@/apis/auth/login'
+// import login from '@/apis/auth/login'
 import React, { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { ToastContainer, toast } from 'react-toastify'
+import { useAuth } from '@/context/AuthContext'
 const SignIn = () => {
     const router = useRouter()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [noti, setNoti] = useState('')
+    const { login } = useAuth()
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-
         try {
-            const response = await login(email, password)
-            if (response) {
-                router.push('/')
-            }
-        } catch (error: any) {
-            console.log(error.response.data.message)
-            setNoti(error.response.data.message)
-            toast.error('Login failed!')
+            await login(email, password)
+        } catch (err) {
+            setNoti('Invalid credentials')
         }
     }
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     e.preventDefault()
+
+    //     try {
+    //         const response = await login(email, password)
+    //         if (response) {
+    //             router.push('/')
+    //         }
+    //     } catch (error: any) {
+    //         console.log(error.response.data.message)
+    //         setNoti(error.response.data.message)
+    //         toast.error('Login failed!')
+    //     }
+    // }
     return (
         <div className="h-[calc(100vh-10rem)] flex justify-center items-center">
             <div className="h-3/4 w-1/3 flex flex-col items-center justify-center px-10 border-2 border-blue-700 bg-gray-100 rounded-lg gap-y-10">

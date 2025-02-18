@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-
+import { AuthProvider } from '@/context/AuthContext'
 // These styles apply to every route in the application
 import './globals.css'
 import Header from '@/components/Layout/Header'
@@ -16,13 +16,15 @@ export default function RootLayout({
     children: React.ReactNode
 }) {
     return (
-        <html lang="en">
-            <body className="flex flex-col min-h-screen">
-                <Header />
-                <div className="flex-grow">{children}</div>
+        <AuthProvider>
+            <html lang="en">
+                <body className="flex flex-col min-h-screen">
+                    <Header />
+                    <div className="flex-grow">{children}</div>
 
-                <Footer />
-            </body>
-        </html>
+                    <Footer />
+                </body>
+            </html>
+        </AuthProvider>
     )
 }

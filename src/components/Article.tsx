@@ -4,7 +4,7 @@ import React from 'react'
 import FavoriteIcon from '@mui/icons-material/Favorite'
 const Article = ({ author, title, description }: any) => {
     return (
-        <div className="border-b-4 pb-6 mt-4">
+        <div className="border-b-4 pb-6 mt-4 cursor-pointer">
             <div className="flex justify-between">
                 <div className="flex gap-x-3">
                     <Image
