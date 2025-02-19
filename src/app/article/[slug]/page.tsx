@@ -1,6 +1,7 @@
 'use client'
 
 import ArticleTag from '@/components/ArticleTag'
+import AuthorInfo from '@/components/AuthorInfo'
 import Comment from '@/components/Comment'
 import Favorite from '@/components/Favorite'
 import { useEffect, useState } from 'react'
@@ -48,7 +49,13 @@ export default function ArticleDetailPage({
                 </div>
 
                 {/* Right*/}
-                <div className="w-1/4">Author Information</div>
+                <div className="w-1/4">
+                    <AuthorInfo
+                        author={article?.user?.username}
+                        email={article?.user?.email}
+                        bio={article?.user?.bio}
+                    />
+                </div>
             </div>
         </>
     )
