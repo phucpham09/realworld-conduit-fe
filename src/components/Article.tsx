@@ -2,7 +2,13 @@
 import Image from 'next/image'
 import React from 'react'
 import Favorite from './Favorite'
-const Article = ({ author, title, description, viewArticleDetail }: any) => {
+const Article = ({
+    author,
+    title,
+    description,
+    viewArticleDetail,
+    tags,
+}: any) => {
     return (
         <div className="border-b-4 pb-6 mt-4">
             <div className="flex justify-between">
@@ -35,15 +41,14 @@ const Article = ({ author, title, description, viewArticleDetail }: any) => {
                     Read more...
                 </p>
                 <ul className="flex gap-x-3">
-                    <li className="border-2 px-2 rounded-full text-gray-400">
-                        java
-                    </li>
-                    <li className="border-2 px-2 rounded-full text-gray-400">
-                        java
-                    </li>
-                    <li className="border-2 px-2 rounded-full text-gray-400">
-                        java
-                    </li>
+                    {tags?.map((tag: any, index: number) => (
+                        <li
+                            className="border-2 px-2 rounded-full text-gray-400"
+                            key={index}
+                        >
+                            {tag.name}
+                        </li>
+                    ))}
                 </ul>
             </div>
         </div>

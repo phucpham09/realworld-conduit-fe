@@ -7,12 +7,14 @@ import { useState, useEffect } from 'react'
 import Pagination from '@mui/material/Pagination'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
+import getAllTags from '@/apis/tags/getAllTags'
 export default function Home() {
     const { user, loading, logout } = useAuth()
     const router = useRouter()
     const [currentTab, setCurrentTab] = useState('Global Feed')
     const [allTab, setAllTab] = useState(['Global Feed', 'Your Feed'])
     const [currentPage, setCurrentPage] = useState(1)
+    const [tagList, setTagList] = useState<string[]>([])
     const [articles, setArticles] = useState<{
         article: any[]
         totalPage: number
@@ -28,6 +30,12 @@ export default function Home() {
         router.push(`/article/${slug}`)
     }
     useEffect(() => {
+        const fetchedAllTag = async () => {
+            const fetchedTag = await getAllTags()
+            console.log(fetchedTag.data)
+            setTagList(fetchedTag.data)
+        }
+        fetchedAllTag()
         const fetchedAllArticles = async () => {
             const fetchedArticle = await getAllArticles(currentPage)
             setArticles(fetchedArticle.data)
@@ -65,6 +73,7 @@ export default function Home() {
                                 slug={article.slug}
                                 title={article.title}
                                 description={article.description}
+                                tags={article.tags}
                                 viewArticleDetail={() =>
                                     onClickArticleDetail(article.slug)
                                 }
@@ -88,7 +97,7 @@ export default function Home() {
                     />
                 </div>
                 <div className="w-1/4">
-                    <TagList />
+                    <TagList tagList={tagList} />
                 </div>
             </div>
         </div>
