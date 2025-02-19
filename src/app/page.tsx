@@ -31,6 +31,8 @@ export default function Home() {
         }
         fetchedAllArticles()
         if (!loading && !user) {
+            setAllTab(['Global Feed'])
+            setCurrentTab('Global Feed')
             router.push('/')
         }
     }, [currentPage, user, loading, router])
