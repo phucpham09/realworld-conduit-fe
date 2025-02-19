@@ -32,7 +32,6 @@ export default function Home() {
     useEffect(() => {
         const fetchedAllTag = async () => {
             const fetchedTag = await getAllTags()
-            console.log(fetchedTag.data)
             setTagList(fetchedTag.data)
         }
         fetchedAllTag()
@@ -97,7 +96,10 @@ export default function Home() {
                     />
                 </div>
                 <div className="w-1/4">
-                    <TagList tagList={tagList} />
+                    <div className="bg-gray-200 p-4 rounded-md">
+                        <p className="text-xl mb-3">Popular Tags</p>
+                        <TagList tagList={tagList} />
+                    </div>
                 </div>
             </div>
         </div>

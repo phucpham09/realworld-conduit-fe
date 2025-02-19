@@ -1,12 +1,12 @@
 import Comment from '@/components/Comment'
 import Favorite from '@/components/Favorite'
+import TagList from '@/components/TagList'
 
-export default async function ArticleDetailPage({
+export default function ArticleDetailPage({
     params,
 }: {
     params: Promise<{ slug: string }>
 }) {
-    const slug = (await params).slug
     return (
         <>
             <div className="flex px-20 gap-x-10 my-10">
@@ -24,9 +24,7 @@ export default async function ArticleDetailPage({
 
                     {/* Tag*/}
                     <div className="flex place-self-end gap-x-2">
-                        <p>1</p>
-                        <p>1</p>
-                        <p>1</p>
+                        <TagList />
                     </div>
 
                     {/* Horizontal line*/}
