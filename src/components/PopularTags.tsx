@@ -1,9 +1,9 @@
 import React from 'react'
 
-const TagList = ({ tagList }: any) => {
+const PopularTags = ({ tags }: any) => {
     return (
         <ul className="flex gap-x-2 flex-wrap gap-y-1">
-            {tagList?.map((tag: any) => (
+            {tags?.map((tag: any) => (
                 <li
                     key={tag.tagid}
                     className="border-2 border-black bg-gray-400 rounded-full px-2 py-1 cursor-pointer"
@@ -15,4 +15,4 @@ const TagList = ({ tagList }: any) => {
     )
 }
 
-export default TagList
+export default PopularTags

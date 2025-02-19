@@ -2,12 +2,13 @@
 import getAllArticles from '@/apis/articles/getAllArticles'
 import Article from '@/components/Article'
 import Banner from '@/components/Banner'
-import TagList from '@/components/TagList'
+import TagList from '@/components/PopularTags'
 import { useState, useEffect } from 'react'
 import Pagination from '@mui/material/Pagination'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
 import getAllTags from '@/apis/tags/getAllTags'
+import PopularTags from '@/components/PopularTags'
 export default function Home() {
     const { user, loading, logout } = useAuth()
     const router = useRouter()
@@ -26,8 +27,9 @@ export default function Home() {
     const handlePageChange = (event: any, value: any) => {
         setCurrentPage(value)
     }
-    const onClickArticleDetail = (slug: string) => {
-        router.push(`/article/${slug}`)
+    const onClickArticleDetail = (article: any) => {
+        localStorage.setItem('selectedArticle', JSON.stringify(article))
+        router.push(`/article/${article.slug}`)
     }
     useEffect(() => {
         const fetchedAllTag = async () => {
@@ -74,7 +76,7 @@ export default function Home() {
                                 description={article.description}
                                 tags={article.tags}
                                 viewArticleDetail={() =>
-                                    onClickArticleDetail(article.slug)
+                                    onClickArticleDetail(article)
                                 }
                             />
                         ))}
@@ -98,7 +100,7 @@ export default function Home() {
                 <div className="w-1/4">
                     <div className="bg-gray-200 p-4 rounded-md">
                         <p className="text-xl mb-3">Popular Tags</p>
-                        <TagList tagList={tagList} />
+                        <PopularTags tags={tagList} />
                     </div>
                 </div>
             </div>

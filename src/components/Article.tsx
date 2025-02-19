@@ -2,6 +2,7 @@
 import Image from 'next/image'
 import React from 'react'
 import Favorite from './Favorite'
+import ArticleTag from './ArticleTag'
 const Article = ({
     author,
     title,
@@ -40,16 +41,7 @@ const Article = ({
                 <p className="text-gray-400" onClick={viewArticleDetail}>
                     Read more...
                 </p>
-                <ul className="flex gap-x-3">
-                    {tags?.map((tag: any, index: number) => (
-                        <li
-                            className="border-2 px-2 rounded-full text-gray-400"
-                            key={index}
-                        >
-                            {tag.name}
-                        </li>
-                    ))}
-                </ul>
+                <ArticleTag tags={tags} />
             </div>
         </div>
     )
