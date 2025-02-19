@@ -24,6 +24,9 @@ export default function Home() {
     const handlePageChange = (event: any, value: any) => {
         setCurrentPage(value)
     }
+    const onClickArticleDetail = (slug: string) => {
+        router.push(`/article/${slug}`)
+    }
     useEffect(() => {
         const fetchedAllArticles = async () => {
             const fetchedArticle = await getAllArticles(currentPage)
@@ -59,8 +62,12 @@ export default function Home() {
                             <Article
                                 key={article.articleid}
                                 author={article.user.username}
+                                slug={article.slug}
                                 title={article.title}
                                 description={article.description}
+                                viewArticleDetail={() =>
+                                    onClickArticleDetail(article.slug)
+                                }
                             />
                         ))}
                     </div>

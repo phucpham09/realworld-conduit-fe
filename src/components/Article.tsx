@@ -1,8 +1,8 @@
 'use client'
 import Image from 'next/image'
 import React from 'react'
-import FavoriteIcon from '@mui/icons-material/Favorite'
-const Article = ({ author, title, description }: any) => {
+import Favorite from './Favorite'
+const Article = ({ author, title, description, viewArticleDetail }: any) => {
     return (
         <div className="border-b-4 pb-6 mt-4">
             <div className="flex justify-between">
@@ -24,17 +24,16 @@ const Article = ({ author, title, description }: any) => {
                     </div>
                 </div>
 
-                <div className="flex justify-center items-center border-4 border-blue-700 p-3 rounded-lg gap-x-1 cursor-pointer">
-                    <p className="text-xl">10</p>
-                    <FavoriteIcon color="primary" />
-                </div>
+                <Favorite />
             </div>
-            <div className="mt-4 cursor-pointer">
+            <div className="mt-4 cursor-pointer" onClick={viewArticleDetail}>
                 <h2 className="text-2xl font-semibold">{title}</h2>
                 <p className="text-xl text-gray-500">{description}</p>
             </div>
             <div className="mt-3 flex justify-between cursor-pointer">
-                <p className="text-gray-400">Read more...</p>
+                <p className="text-gray-400" onClick={viewArticleDetail}>
+                    Read more...
+                </p>
                 <ul className="flex gap-x-3">
                     <li className="border-2 px-2 rounded-full text-gray-400">
                         java
