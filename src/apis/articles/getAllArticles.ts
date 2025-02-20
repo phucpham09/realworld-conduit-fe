@@ -1,8 +1,6 @@
-import axios from 'axios'
+import API from '@/lib/axiosInstance'
 const getAllArticles = async (currentPage: number) => {
-    const res = await axios.get(
-        `http://localhost:3001/articles?page=${currentPage}`
-    )
+    const res = await API.get(`/articles?page=${currentPage}`)
     return res
 }
 
