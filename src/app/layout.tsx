@@ -19,7 +19,10 @@ export default function RootLayout({
         <AuthProvider>
             <html lang="en">
                 <body className="flex flex-col min-h-screen">
-                    <Header />
+                    <div className="sticky top-0 z-50">
+                        <Header />
+                    </div>
+
                     <div className="flex-grow">{children}</div>
 
                     <Footer />
