@@ -4,6 +4,8 @@ import ArticleTag from '@/components/ArticleTag'
 import AuthorInfo from '@/components/AuthorInfo'
 import Comment from '@/components/Comment'
 import Favorite from '@/components/Favorite'
+import { useAuth } from '@/context/AuthContext'
+import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
 export default function ArticleDetailPage({
@@ -11,6 +13,7 @@ export default function ArticleDetailPage({
 }: {
     params: Promise<{ slug: string }>
 }) {
+    const { user } = useAuth()
     const [article, setArticle] = useState<any>(null)
     useEffect(() => {
         const selectedArticleTag: any = localStorage.getItem('selectedArticle')
@@ -45,7 +48,19 @@ export default function ArticleDetailPage({
                     </div>
 
                     {/* Comment*/}
-                    <Comment />
+                    {user ? (
+                        <Comment />
+                    ) : (
+                        <p>
+                            Please{' '}
+                            <Link href="/signin">
+                                <span className="text-blue-700 hover:underline cursor-pointer">
+                                    sign in
+                                </span>
+                            </Link>{' '}
+                            to comment
+                        </p>
+                    )}
                 </div>
 
                 {/* Right*/}
