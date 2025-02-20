@@ -3,6 +3,7 @@
 import ArticleTag from '@/components/ArticleTag'
 import AuthorInfo from '@/components/AuthorInfo'
 import Comment from '@/components/Comment'
+import CommentForm from '@/components/CommentForm'
 import Favorite from '@/components/Favorite'
 import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
@@ -46,10 +47,25 @@ export default function ArticleDetailPage({
                     <div>
                         <h2>{article?.body}</h2>
                     </div>
+                    <div className="border my-6"></div>
+                    <h2 className="text-2xl mb-4">Comments</h2>
+                    {article?.comments.length === 0 && (
+                        <p>There is no comment yet.</p>
+                    )}
+                    {article?.comments?.map((comment: any) => (
+                        <Comment
+                            key={comment.commentid}
+                            content={comment.content}
+                            author={article.user.username}
+                        />
+                    ))}
 
+                    <p className="mt-3 text-gray-400 cursor-pointer">
+                        See more...
+                    </p>
                     {/* Comment*/}
                     {user ? (
-                        <Comment />
+                        <CommentForm />
                     ) : (
                         <p>
                             Please{' '}
