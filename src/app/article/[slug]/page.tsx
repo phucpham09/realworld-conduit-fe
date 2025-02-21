@@ -25,8 +25,12 @@ export default function ArticleDetailPage({
     const handleCommentSubmit = async (e: any) => {
         e.preventDefault()
         try {
-            const res = await createComment(content, article.articleid)
+            const newComment = await createComment(content, article.articleid)
             toast.success('Comment created successfully')
+            setArticle((prevArticle: any) => ({
+                ...prevArticle,
+                comments: [...prevArticle.comments, newComment],
+            }))
             setContent('')
         } catch (error) {
             toast.error('Failed to create comment')

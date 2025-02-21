@@ -6,7 +6,10 @@ const createComment = async (content: string, articleId: number) => {
             content: content,
             articleId: articleId,
         })
-    } catch (error) {}
+        return res.data
+    } catch (error: any) {
+        throw new Error(error.message)
+    }
 }
 
 export default createComment
