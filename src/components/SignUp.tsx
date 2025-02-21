@@ -9,7 +9,7 @@ const SignUp = () => {
                     <fieldset className="flex flex-col">
                         <label className="text-2xl">Username</label>
                         <input
-                            type="email"
+                            type="text"
                             className="border-2 mb-6 px-3 py-2 text-2xl rounded-md mt-2"
                             placeholder="Enter your username..."
                         />
