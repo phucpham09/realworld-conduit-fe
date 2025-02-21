@@ -1,5 +1,6 @@
 'use client'
 
+import createComment from '@/apis/comments/createComment'
 import ArticleTag from '@/components/ArticleTag'
 import AuthorInfo from '@/components/AuthorInfo'
 import Comment from '@/components/Comment'
@@ -8,6 +9,7 @@ import Favorite from '@/components/Favorite'
 import { useAuth } from '@/context/AuthContext'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { toast, ToastContainer } from 'react-toastify'
 
 export default function ArticleDetailPage({
     params,
@@ -16,6 +18,20 @@ export default function ArticleDetailPage({
 }) {
     const { user } = useAuth()
     const [article, setArticle] = useState<any>(null)
+    const [content, setContent] = useState('')
+    const handleCommentChange = (e: any) => {
+        setContent(e.target.value)
+    }
+    const handleCommentSubmit = async (e: any) => {
+        e.preventDefault()
+        try {
+            const res = await createComment(content, article.articleid)
+            toast.success('Comment created successfully')
+            setContent('')
+        } catch (error) {
+            toast.error('Failed to create comment')
+        }
+    }
     useEffect(() => {
         const selectedArticleTag: any = localStorage.getItem('selectedArticle')
         setArticle(JSON.parse(selectedArticleTag))
@@ -65,7 +81,11 @@ export default function ArticleDetailPage({
                     </p>
                     {/* Comment*/}
                     {user ? (
-                        <CommentForm />
+                        <CommentForm
+                            comment={content}
+                            handleCommentChange={handleCommentChange}
+                            handleCommentSubmit={handleCommentSubmit}
+                        />
                     ) : (
                         <p>
                             Please{' '}
@@ -88,6 +108,7 @@ export default function ArticleDetailPage({
                     />
                 </div>
             </div>
+            <ToastContainer />
         </>
     )
 }

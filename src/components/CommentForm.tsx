@@ -1,7 +1,11 @@
 import Image from 'next/image'
 import React from 'react'
 
-const Comment = () => {
+const Comment = ({
+    handleCommentChange,
+    comment,
+    handleCommentSubmit,
+}: any) => {
     return (
         <div className="mt-4">
             <div className="flex gap-x-2">
@@ -15,12 +19,17 @@ const Comment = () => {
                     height={40}
                 />
                 <textarea
+                    value={comment}
+                    onChange={handleCommentChange}
                     className="flex-grow border px-3 py-2 border-black rounded-md"
                     rows={3}
                     placeholder="Leave your comment..."
                 ></textarea>
             </div>
-            <div className="place-self-end cursor-pointer border mt-3 text-xl px-2 py-1 rounded-md bg-blue-700 text-white">
+            <div
+                onClick={handleCommentSubmit}
+                className="place-self-end cursor-pointer border mt-3 text-xl px-2 py-1 rounded-md bg-blue-700 text-white"
+            >
                 Submit
             </div>
         </div>
