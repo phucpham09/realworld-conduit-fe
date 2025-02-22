@@ -10,23 +10,62 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
 import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
 import SearchIcon from '@mui/icons-material/Search'
+import CloseIcon from '@mui/icons-material/Close'
 const Header = () => {
     const { user, logout } = useAuth()
     const pathname = usePathname()
     const router = useRouter()
-
+    const [isMenuOpen, setIsMenuOpen] = useState(false)
+    const handleMenuClick = () => {
+        setIsMenuOpen(!isMenuOpen)
+    }
     return (
-        <div className="flex h-16 justify-between items-center sm:h-20 sm:px-24 bg-yellow-400">
-            <div className="sm:hidden">
-                <MenuIcon className="" fontSize="large" />
+        <div className="flex px-2 h-16 justify-between items-center sm:h-20 sm:px-24 bg-yellow-400">
+            <div
+                className={`sm:hidden
+                    ${
+                        isMenuOpen
+                            ? `w-1/2 h-full fixed z-50 bg-white left-0 top-0`
+                            : ``
+                    }`}
+            >
+                <div className="" onClick={handleMenuClick}>
+                    {isMenuOpen ? (
+                        <div className="flex flex-col">
+                            <div className="flex justify-end">
+                                <CloseIcon fontSize="large" className="mt-2" />
+                            </div>
+                            <ul className="flex flex-col gap-y-2 bg-gray-200  text-2xl font-semibold">
+                                <li
+                                    className="border-b-2 px-2 border-black"
+                                    onClick={() => router.push('/signin')}
+                                >
+                                    Sign In
+                                </li>
+                                <li
+                                    className="border-b-2 px-2 border-black"
+                                    onClick={() => router.push('/signup')}
+                                >
+                                    Sign Up
+                                </li>
+                            </ul>
+                        </div>
+                    ) : (
+                        <div className="flex justify-end">
+                            <MenuIcon fontSize="large" />
+                        </div>
+                    )}
+                </div>
             </div>
 
             <h1 className="place-self-center text-3xl font-bold text-blue-700 cursor-pointer">
                 <Link href={'/'}>VBLOG</Link>
             </h1>
-            <div className="sm:hidden">
-                <SearchIcon fontSize="large" />
-            </div>
+            {pathname !== 'signin' && (
+                <div className="sm:hidden">
+                    <SearchIcon fontSize="large" />
+                </div>
+            )}
             {pathname !== '/signin' && (
                 <input
                     type="search"
