@@ -32,15 +32,24 @@ const Header = () => {
                 <div className="" onClick={handleMenuClick}>
                     {isMenuOpen ? (
                         <div className="flex flex-col">
-                            <div className="flex justify-between pl-2">
-                                {user && (
+                            {user ? (
+                                <div className="flex justify-between pl-2 ">
                                     <h2 className="text-xl flex justify-center items-center">
                                         Hi, PhucPham
                                     </h2>
-                                )}
-
-                                <CloseIcon fontSize="large" className="mt-2" />
-                            </div>
+                                    <CloseIcon
+                                        fontSize="large"
+                                        className="mt-2"
+                                    />
+                                </div>
+                            ) : (
+                                <div className="flex justify-end pl-2 ">
+                                    <CloseIcon
+                                        fontSize="large"
+                                        className="mt-2"
+                                    />
+                                </div>
+                            )}
 
                             {user ? (
                                 <ul className="flex flex-col gap-y-2 bg-gray-200  text-2xl font-semibold">

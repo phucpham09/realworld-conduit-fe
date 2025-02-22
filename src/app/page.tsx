@@ -53,8 +53,12 @@ export default function Home() {
     return (
         <div className="">
             {!user && <Banner />}
-            <div className="flex px-20 my-10 gap-x-10">
-                <div className="w-3/4">
+            <div className="sm:flex sm:px-20 sm:my-10 sm:gap-x-10">
+                <div className="bg-gray-200 p-4 rounded-md sm:hidden">
+                    <p className="text-xl mb-3">Popular Tags</p>
+                    <PopularTags tags={tagList} />
+                </div>
+                <div className="sm:w-3/4 max-sm:px-4">
                     <ul className="flex border-b-2 gap-x-6">
                         {allTab.map((tab: string, index: number) => (
                             <li
@@ -86,7 +90,7 @@ export default function Home() {
                             display: 'flex',
                             alignItems: 'center',
                             justifyContent: 'center',
-                            margin: '40px 0 0 0',
+                            margin: '40px 0 10px 0',
                         }}
                         count={articles.totalPage}
                         page={currentPage}
@@ -97,7 +101,7 @@ export default function Home() {
                         onChange={handlePageChange}
                     />
                 </div>
-                <div className="w-1/4">
+                <div className="w-1/4 max-sm:hidden">
                     <div className="bg-gray-200 p-4 rounded-md">
                         <p className="text-xl mb-3">Popular Tags</p>
                         <PopularTags tags={tagList} />
