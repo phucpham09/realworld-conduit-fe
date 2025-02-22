@@ -7,22 +7,31 @@ import LogoutIcon from '@mui/icons-material/Logout'
 import { useAuth } from '@/context/AuthContext'
 import { usePathname, useRouter } from 'next/navigation'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline'
+import MenuIcon from '@mui/icons-material/Menu'
 import Image from 'next/image'
+import SearchIcon from '@mui/icons-material/Search'
 const Header = () => {
     const { user, logout } = useAuth()
     const pathname = usePathname()
     const router = useRouter()
 
     return (
-        <div className="flex justify-between items-center h-20 px-24 bg-yellow-400">
+        <div className="flex h-16 justify-between items-center sm:h-20 sm:px-24 bg-yellow-400">
+            <div className="sm:hidden">
+                <MenuIcon className="" fontSize="large" />
+            </div>
+
             <h1 className="place-self-center text-3xl font-bold text-blue-700 cursor-pointer">
                 <Link href={'/'}>VBLOG</Link>
             </h1>
+            <div className="sm:hidden">
+                <SearchIcon fontSize="large" />
+            </div>
             {pathname !== '/signin' && (
                 <input
                     type="search"
                     placeholder="Search..."
-                    className="px-3 py-2 rounded-full w-1/3 outline-none focus:ring-2 focus:ring-blue-700"
+                    className="sm:px-3 sm:py-2 sm:rounded-full sm:w-1/3 sm:outline-none sm:focus:ring-2 sm:focus:ring-blue-700 max-sm:hidden"
                 />
             )}
 
@@ -60,7 +69,7 @@ const Header = () => {
                     </ul>
                 </div>
             ) : (
-                <ul className="flex gap-x-4 place-self-center text-xl">
+                <ul className="sm:flex sm:gap-x-4 sm:place-self-center sm:text-xl hidden">
                     <li className="border-2 border-blue-400 px-2 py-1 rounded-md cursor-pointer bg-blue-200">
                         <Link href="/signin">
                             <LoginIcon />
