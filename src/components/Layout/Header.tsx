@@ -32,23 +32,49 @@ const Header = () => {
                 <div className="" onClick={handleMenuClick}>
                     {isMenuOpen ? (
                         <div className="flex flex-col">
-                            <div className="flex justify-end">
+                            <div className="flex justify-between pl-2">
+                                {user && (
+                                    <h2 className="text-xl flex justify-center items-center">
+                                        Hi, PhucPham
+                                    </h2>
+                                )}
+
                                 <CloseIcon fontSize="large" className="mt-2" />
                             </div>
-                            <ul className="flex flex-col gap-y-2 bg-gray-200  text-2xl font-semibold">
-                                <li
-                                    className="border-b-2 px-2 border-black"
-                                    onClick={() => router.push('/signin')}
-                                >
-                                    Sign In
-                                </li>
-                                <li
-                                    className="border-b-2 px-2 border-black"
-                                    onClick={() => router.push('/signup')}
-                                >
-                                    Sign Up
-                                </li>
-                            </ul>
+
+                            {user ? (
+                                <ul className="flex flex-col gap-y-2 bg-gray-200  text-2xl font-semibold">
+                                    <li
+                                        className="border-b-2 px-2 border-black"
+                                        onClick={() =>
+                                            router.push('/createArticle')
+                                        }
+                                    >
+                                        New Article
+                                    </li>
+                                    <li
+                                        className="border-b-2 px-2 border-black"
+                                        onClick={logout}
+                                    >
+                                        Log out
+                                    </li>
+                                </ul>
+                            ) : (
+                                <ul className="flex flex-col gap-y-2 bg-gray-200  text-2xl font-semibold">
+                                    <li
+                                        className="border-b-2 px-2 border-black"
+                                        onClick={() => router.push('/signin')}
+                                    >
+                                        Sign In
+                                    </li>
+                                    <li
+                                        className="border-b-2 px-2 border-black"
+                                        onClick={() => router.push('/signup')}
+                                    >
+                                        Sign Up
+                                    </li>
+                                </ul>
+                            )}
                         </div>
                     ) : (
                         <div className="flex justify-end">
@@ -75,7 +101,7 @@ const Header = () => {
             )}
 
             {user ? (
-                <div className="flex">
+                <div className="sm:flex max-sm:hidden">
                     <Link
                         href={'/createArticle'}
                         className="flex mr-10 text-xl cursor-pointer bg-blue-700 justify-center items-center px-3 py-1 rounded-full text-white"
