@@ -42,7 +42,14 @@ export default function ArticleDetailPage({
     }, [])
     return (
         <>
-            <div className="flex px-20 gap-x-10 my-10">
+            <div className="flex max-sm:flex-col justify-center max-sm:items-center sm:px-20 sm:gap-x-10 my-10">
+                <div className="mb-4 sm:hidden">
+                    <AuthorInfo
+                        author={article?.user?.username}
+                        email={article?.user?.email}
+                        bio={article?.user?.bio}
+                    />
+                </div>
                 {/* Left*/}
                 <div className="w-3/4">
                     <div className="flex justify-between">
@@ -104,7 +111,7 @@ export default function ArticleDetailPage({
                 </div>
 
                 {/* Right*/}
-                <div className="w-1/4">
+                <div className="w-1/4 max-sm:hidden">
                     <AuthorInfo
                         author={article?.user?.username}
                         email={article?.user?.email}
