@@ -83,7 +83,7 @@ export default function ArticleDetailPage({
                         <Comment
                             key={comment.commentid}
                             content={comment.content}
-                            author={article.user.username}
+                            CommentAuthor={comment?.user?.username}
                         />
                     ))}
 

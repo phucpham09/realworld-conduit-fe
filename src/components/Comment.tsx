@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import React from 'react'
 
-const Comment = ({ content, author }: any) => {
+const Comment = ({ content, CommentAuthor }: any) => {
     return (
         <div className="flex gap-x-2">
             <div>
@@ -17,7 +17,7 @@ const Comment = ({ content, author }: any) => {
             </div>
             <div className="">
                 <div className="border bg-gray-200 w-fit min-w-52 px-3 py-2 rounded-md">
-                    <p className="font-semibold">{author}</p>
+                    <p className="font-semibold">{CommentAuthor}</p>
                     <p>{content}</p>
                 </div>
                 <p className="text-sm text-gray-400">Feb 25, 2021</p>
