@@ -20,8 +20,8 @@ const SignIn = () => {
     }
 
     return (
-        <div className="h-[calc(100vh-10rem)] flex justify-center items-center">
-            <div className="h-3/4 sm:w-1/3 w-3/4 flex flex-col items-center justify-center sm:px-10 px-6 border-2 border-blue-700 bg-gray-100 rounded-lg gap-y-10">
+        <div className="min-h-[calc(100vh-12rem)] flex justify-center items-center my-4">
+            <div className="sm:w-1/3 w-3/4 flex flex-col items-center justify-center sm:px-10 px-6 border-2 border-blue-700 bg-gray-100 rounded-lg gap-y-10">
                 <h1 className="text-3xl font-semibold">Sign In</h1>
                 <form
                     className="w-11/12 flex flex-col "
