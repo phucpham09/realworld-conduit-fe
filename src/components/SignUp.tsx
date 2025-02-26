@@ -8,10 +8,15 @@ const SignUp = () => {
     const [username, setUsername] = React.useState('')
     const [email, setEmail] = React.useState('')
     const [password, setPassword] = React.useState('')
+    const [role, setRole] = React.useState('user')
     const handleSubmit = async (e: any) => {
         e.preventDefault()
-        const res = await signup(username, email, password)
-        router.push('/signin')
+        const res = await signup(username, email, password, role)
+        if (res?.data.role === 'admin') {
+            router.push('/admin/dashboard')
+        } else {
+            router.push('/signin')
+        }
     }
     return (
         <div className="my-4 flex justify-center items-center">
@@ -42,6 +47,16 @@ const SignUp = () => {
                         className="border-2 mb-6 px-3 py-2 sm:text-2xl text-xl rounded-md mt-2"
                         placeholder="Enter your password..."
                     />
+                    <label className="text-2xl">Role</label>
+                    <select
+                        value={role}
+                        onChange={(e) => setRole(e.target.value)}
+                        className="border-2 mb-6 px-3 py-2 sm:text-2xl text-xl rounded-md mt-2"
+                    >
+                        <option value="user">user</option>
+                        <option value="admin">admin</option>
+                    </select>
+
                     <button
                         type="submit"
                         className="border py-2 text-xl font-semibold mb-4 place-self-end px-4 text-white bg-blue-700 border-blue-700 rounded-lg"

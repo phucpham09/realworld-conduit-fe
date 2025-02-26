@@ -123,7 +123,10 @@ const Header = () => {
                             <Image
                                 className="cursor-pointer rounded-full"
                                 alt="avatar"
-                                src={user?.imageUrl}
+                                src={
+                                    user?.imageUrl ||
+                                    'https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png'
+                                }
                                 width={40}
                                 height={40}
                             />

@@ -13,7 +13,7 @@ const SignIn = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         try {
-            await login(email, password)
+            const res = await login(email, password)
         } catch (err) {
             setNoti('Invalid credentials')
         }

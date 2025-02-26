@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState } from 'react'
 import API from '@/lib/axiosInstance'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 
 interface User {
     email: string
@@ -39,6 +39,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         try {
             const res = await API.get('/auth/profile')
             setUser(res.data)
+            return res.data
         } catch (error) {
             console.error('Error fetching user', error)
             logout()
@@ -53,8 +54,12 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
             const { access_token } = res.data
 
             localStorage.setItem('access_token', access_token)
-            await fetchUser()
-            router.push('/') // Redirect after login
+            const userData = await fetchUser()
+            if (userData?.role !== 'admin') {
+                router.push('/')
+            } else {
+                router.push('/admin/dashboard')
+            } // Redirect after login
         } catch (error) {
             console.error('Login failed', error)
             throw new Error('Invalid credentials')
