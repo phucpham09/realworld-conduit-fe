@@ -79,6 +79,10 @@ export default function Home() {
                                 title={article.title}
                                 description={article.description}
                                 tags={article.tags}
+                                imageUrl={
+                                    article.user?.imageUrl ||
+                                    'https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png'
+                                }
                                 viewArticleDetail={() =>
                                     onClickArticleDetail(article)
                                 }

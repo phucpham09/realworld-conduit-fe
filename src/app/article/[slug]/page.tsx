@@ -84,6 +84,10 @@ export default function ArticleDetailPage({
                             key={comment.commentid}
                             content={comment.content}
                             CommentAuthor={comment?.user?.username}
+                            imageUrl={
+                                comment?.user?.imageUrl ||
+                                'https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png'
+                            }
                         />
                     ))}
 
@@ -96,6 +100,10 @@ export default function ArticleDetailPage({
                             comment={content}
                             handleCommentChange={handleCommentChange}
                             handleCommentSubmit={handleCommentSubmit}
+                            imageUrl={
+                                user?.imageUrl ||
+                                'https://icons.veryicon.com/png/o/miscellaneous/rookie-official-icon-gallery/225-default-avatar.png'
+                            }
                         />
                     ) : (
                         <p>
